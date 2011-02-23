@@ -1,0 +1,90 @@
+@startuml
+
+namespace Video
+
+class RenderData {
+	+ ObjectId: int
+	+ MaterialId: int
+	+ MeshId: int
+}
+
+RenderBackend "1" --> "*" RenderData: - m_RenderData
+RenderBackend "1" --> "*" Renderer: - m_Renderer
+class RenderBackend {
+	+ RenderBackend()
+	+ virtual ~RenderBackend()
+	+ StartFrame()
+	+ PushRenderData(data: RenderData)
+	+ Render()
+	+ Select(area: Rectangle): int[*]
+	+ EndFrame()
+	
+	- m_Selection: int[*]
+}
+
+class Mesh {
+	- m_VertexBufferObjectId: GLuint
+}
+
+MaterialPool "1" --> "*" Material: - m_Materials
+class MaterialPool {
+}
+
+Material "1" --> "*" TextureLayer: - m_Textures
+Material "1" --> "*" Shader: - m_Shaders
+class Material {
+	+ Bind()
+	+ UnBind()
+	
+	- m_Color
+}
+
+class Shader {
+	+ Bind()
+	+ UnBind()
+}
+
+class TextureLayer {
+	+ Bind()
+	+ UnBind()
+	
+	- m_TextureId: GLuint
+	- m_BlendMode
+}
+
+interface Renderer {
+	+ Render(mesh: Mesh, material: Material)
+}
+
+DefaultRenderer ..|> Renderer
+DefaultRenderer "1" --> "1" MaterialPool: - m_MaterialPool
+class DefaultRenderer {
+
+}
+
+ColorPickingRenderer ..|> Renderer
+class ColorPickingRenderer {
+
+}
+
+end namespace
+
+
+enum Test {
+	item
+}
+
+
+namespace Model
+
+class WorldObject {
+	- m_ObjectId: int
+	- m_MaterialId: int
+	- m_MeshId: int
+	- m_Position: Vector3
+}
+
+end namespace
+
+@enduml
+

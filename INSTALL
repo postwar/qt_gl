@@ -1,0 +1,38 @@
+== Building, Installing and Running Qt GL ==
+
+=== Notes ===
+No notes
+
+
+=== Dependencies ===
+A list of all libraries required to build the project:
+  * qt
+
+Required tools to build the project
+  * cmake
+  * gcc
+
+
+=== Build and Install ===
+Configure the project:
+  * 'cmake .'
+Compile the project:
+  * 'make'
+Install the project:
+  * 'make install'
+
+
+== Platform specific details ==
+
+=== Linux ===
+Nothing so far.
+
+
+
+=== OS X ===
+Nothing so far.
+
+
+
+=== Win32 ===
+Nothing so far
