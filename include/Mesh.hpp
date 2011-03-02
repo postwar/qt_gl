@@ -1,11 +1,17 @@
 #ifndef MESH_HPP_
 #define MESH_HPP_
 
-#include <GL/glew.h>
+
 #include <vector>
 #include "VertexData.hpp"
 
+
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
+
+#ifndef USE_QT_VBO
+
+#include <GL/glew.h>
 
 class Mesh {
 	public:
@@ -35,14 +41,11 @@ class Mesh {
 
 
 
+#else
 
 
-/*
+
 #include <QGLBuffer>
-#include <vector>
-#include "VertexData.hpp"
-
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 class Mesh {
 	public:
@@ -69,6 +72,7 @@ class Mesh {
 		static const int TEXTURE_COORD_OFFSET;
 		static const int TEXTURE_COORD_SIZE;
 };
-*/
+
+#endif
 
 #endif

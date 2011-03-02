@@ -8,6 +8,9 @@ const int Mesh::TEXTURE_COORD_OFFSET = 24;
 const int Mesh::TEXTURE_COORD_SIZE = 8;
 
 
+
+#ifndef USE_QT_VBO
+
 Mesh::Mesh() {
 }
 
@@ -100,7 +103,10 @@ void Mesh::Render() {
 
 
 
-/*
+#else
+
+
+
 Mesh::Mesh() : m_Vbo(QGLBuffer::VertexBuffer), m_Ibo(QGLBuffer::IndexBuffer) {
 }
 
@@ -189,5 +195,6 @@ void Mesh::Render() {
 	
 	glDrawRangeElements(GL_TRIANGLES, m_IndexStart, m_IndexEnd, count, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
 }
-*/
+
+#endif
 
