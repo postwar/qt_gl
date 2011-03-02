@@ -47,7 +47,13 @@ QSize QtGlWidget::sizeHint() const {
 
 
 void QtGlWidget::initializeGL() {
-	glewInit();
+	GLenum err = glewInit();
+	if (err != GLEW_OK) {
+		std::cerr << "GLEW initialization failed: " << std::endl;
+		std::cerr << "\t" << glewGetErrorString(err) << std::endl;
+	} else {
+		std::cout << "GLEW initialization successful" << std::endl;
+	}
 
 	TextureLayer *texture1 = new TextureLayer();
 	TextureLayer *texture2 = new TextureLayer();
@@ -97,8 +103,6 @@ void QtGlWidget::paintGL() {
 		
 	float x = cos(counter) * 5;
 	float z = sin(counter) * 5;
-		
-	std::cout << "Light Pos: (" << x << ", " << z << ")" << std::endl;
 	
 	glEnable(GL_LIGHT0);
 	GLfloat position[] = { x, x, z, 1.0f };
