@@ -1,20 +1,20 @@
 # Project related files #
 #########################
-build
 .*
 !.gitignore
+build
 
 # Eclipse settings #
 ####################
 # all files/dirs starting with . are already excluded
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
 *.bak
 *.swp
+*.tmp
 *~.nib
+bin/**
 local.properties
+tmp/**
+tmp/**/*
 
 # NetBeans settings #
 #####################
@@ -22,11 +22,16 @@ nbproject/
 
 # Compiled source #
 ###################
+*.a
 *.com
 *.class
 *.dll
 *.exe
+*.la
+*.lai
+*.lo
 *.o
+*.slo
 *.so
 
 # Packages #
@@ -50,10 +55,10 @@ nbproject/
 
 # OS generated files #
 ######################
+*~
+*.sw[a-p]
 .DS_Store?
+Desktop.ini
 ehthumbs.db
 Icon?
 Thumbs.db
-Desktop.ini
-*~
-*.sw[a-p]
