@@ -173,6 +173,13 @@ void Shader::Bind() {
 	} else {
 		// std::cerr << "Error: Find location 'Tex1'" << std::endl;
 	}
+	
+	samplerLocation = glGetUniformLocation(m_ShaderProgram, "Tex2");
+	if (samplerLocation != -1) {
+		glUniform1i(samplerLocation, 2);
+	} else {
+		// std::cerr << "Error: Find location 'Tex2'" << std::endl;
+	}
 }
 
 

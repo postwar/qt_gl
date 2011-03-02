@@ -51,15 +51,20 @@ void QtGlWidget::initializeGL() {
 
 	TextureLayer *texture1 = new TextureLayer();
 	TextureLayer *texture2 = new TextureLayer();
+	TextureLayer *texture3 = new TextureLayer();
 	m_Mesh = new Mesh();
 	m_Mesh->Create(Objects::CreateSquare());
 	
-	// texture1->Create("../data/gfx/test_normal_map.bmp");
-	texture1->Create("../data/gfx/stone_wall_normal_map.bmp");
+	// texture1->Create("../data/gfx/2008_BlastDoor_TextureDiff_large.jpg");
+	texture1->Create("../data/gfx/stone_wall.bmp");
 	m_Textures.push_back(texture1);
-	// texture2->Create("../data/gfx/sand.jpg");
-	texture2->Create("../data/gfx/stone_wall.bmp");
+	// texture2->Create("../data/gfx/2008_BlastDoor_TextureNormal_large.jpg");
+	texture2->Create("../data/gfx/stone_wall_normal_map.bmp");
 	m_Textures.push_back(texture2);
+	// texture3->Create("../data/gfx/2008_BlastDoor_TextureSpec_large.jpg");
+	texture3->Create("../data/gfx/specular_map.jpg");
+	m_Textures.push_back(texture3);
+
 
 	m_Shader = new Shader();
 	m_Shader->Create("../data/shader/test.vs", "../data/shader/test.fs");
