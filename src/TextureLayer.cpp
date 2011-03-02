@@ -1,6 +1,7 @@
 #include "TextureLayer.hpp"
 #include <QtGui/QImage>
 #include <QtOpenGL/QGLWidget>
+#include <iostream>
 
 
 TextureLayer::TextureLayer() {
@@ -15,7 +16,10 @@ TextureLayer::~TextureLayer() {
 void TextureLayer::Create(const std::string &file) {
 	QImage image;
 	
-	image.load(file.c_str());
+	if (!image.load(file.c_str())) {
+		std::cerr << "Loading image failed: " << file << std::endl;
+	}
+	
 	image = QGLWidget::convertToGLFormat(image);
 	
 	glGenTextures(1, &m_TextureId);
