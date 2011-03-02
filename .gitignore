@@ -2,6 +2,23 @@
 #########################
 build
 .*
+!.gitignore
+
+# Eclipse settings #
+####################
+# all files/dirs starting with . are already excluded
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# NetBeans settings #
+#####################
+nbproject/
 
 # Compiled source #
 ###################
@@ -37,3 +54,6 @@ build
 ehthumbs.db
 Icon?
 Thumbs.db
+Desktop.ini
+*~
+*.sw[a-p]
