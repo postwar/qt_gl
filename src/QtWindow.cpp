@@ -3,7 +3,7 @@
 
 QtWindow::QtWindow() {
 	connect(&m_Timer, SIGNAL(timeout()), this, SLOT(Update()));
-	m_Timer.start(0);
+	m_Timer.start(20);
 	
 	QGLFormat format(QGL::SampleBuffers | QGL::AlphaChannel);
 	// format.setVersion(3, 0);
