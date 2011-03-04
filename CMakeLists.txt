@@ -29,8 +29,9 @@ CONFIGURE_FILE(
 # Config.hpp
 INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}")
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
-# Add the include directory
+# Add the project and external include directories
 INCLUDE_DIRECTORIES("include")
+INCLUDE_DIRECTORIES("ext/glew/include")
 
 INCLUDE(${QT_USE_FILE})
 
