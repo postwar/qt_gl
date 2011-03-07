@@ -6,9 +6,8 @@ QtWindow::QtWindow() {
 	connect(&m_Timer, SIGNAL(timeout()), this, SLOT(Update()));
 	m_Timer.start(20);
 	
+	// create widget with multisampling and alpha channel
 	QGLFormat format(QGL::SampleBuffers | QGL::AlphaChannel);
-	// format.setVersion(3, 0);
-	// format.setProfile(QGLFormat::CompatibilityProfile);
 	m_Widget = new QtGlWidget(format);
 	
 	m_QuitButton = new QPushButton("Quit");
