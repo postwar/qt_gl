@@ -11,6 +11,7 @@ QtGlWidget::QtGlWidget(QGLFormat format, QWidget *parent)
 		// We need the alpha channel for the color picking
 		: QGLWidget(format, parent) {
 	// showFullScreen();
+	setMouseTracking(true);
 }
 
 
@@ -155,6 +156,7 @@ void QtGlWidget::mousePressEvent(QMouseEvent *event) {
 }
 
 
-void QtGlWidget::mouseMoveEvent(QMouseEvent * /* event */) {
+void QtGlWidget::mouseMoveEvent(QMouseEvent *event) {
+	std::cout << "Mouse position: (" << event->x() << ", " << event->y() << ")" << std::endl;
 }
 
