@@ -4,6 +4,7 @@
 
 QtCore::QtCore(int argc, char *argv[])
 		: m_Application(argc, argv) {
+	m_Application.connect(&m_Application, SIGNAL(lastWindowClosed()), &m_Application, SLOT(quit()));
 }
 
 

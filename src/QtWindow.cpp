@@ -30,5 +30,14 @@ void QtWindow::Update() {
 
 
 void QtWindow::Quit() {
-	QMessageBox::information(this, "Information", "Just clicked Ui PushButton");
+	QMessageBox::StandardButton choice = QMessageBox::question(this, "Quit?", "Sure you want to quit?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes );
+	
+	switch( choice ) {
+		case QMessageBox::No:
+		return;
+
+		case QMessageBox::Yes:
+		default:
+			close();
+	}
 }
