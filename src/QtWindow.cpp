@@ -1,4 +1,5 @@
 #include "QtWindow.hpp"
+#include <QtGui/QMessageBox>
 
 
 QtWindow::QtWindow() {
@@ -10,7 +11,11 @@ QtWindow::QtWindow() {
 	// format.setProfile(QGLFormat::CompatibilityProfile);
 	m_Widget = new QtGlWidget(format);
 	
+	m_QuitButton = new QPushButton("Quit");
+	connect(m_QuitButton, SIGNAL(clicked()), this, SLOT(Quit()));
+
 	m_Layout.addWidget(m_Widget);
+	m_Layout.addWidget(m_QuitButton);
 	setLayout(&m_Layout);
 }
 
@@ -21,4 +26,9 @@ QtWindow::~QtWindow() {
 
 void QtWindow::Update() {
 	m_Widget->Update();
+}
+
+
+void QtWindow::Quit() {
+	QMessageBox::information(this, "Information", "Just clicked Ui PushButton");
 }
