@@ -34,10 +34,12 @@ void QtWindow::Quit() {
 	
 	switch( choice ) {
 		case QMessageBox::No:
-		return;
+			return;
+		break;
 
 		case QMessageBox::Yes:
 		default:
 			close();
+		break;
 	}
 }
