@@ -13,8 +13,8 @@ class Shader {
 		/// @param fileVS File name of the vertex shader.
 		/// @param fileFS File name of the fragment shader.
 		void Create(const std::string &fileVS, const std::string &fileFS);
-		void Bind();
-		void UnBind();
+		void Bind() const;
+		void UnBind() const;
 		std::string DebugInfo();
 	
 	private:

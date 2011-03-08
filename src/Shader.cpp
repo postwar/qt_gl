@@ -52,7 +52,7 @@ void Shader::Create(const std::string &fileVS, const std::string &fileFS) {
 }
 
 
-void Shader::Bind() {
+void Shader::Bind() const {
 	glUseProgram(m_ShaderProgram);
 	
 	GLint samplerLocation;
@@ -80,7 +80,7 @@ void Shader::Bind() {
 }
 
 
-void Shader::UnBind() {
+void Shader::UnBind() const {
 	glUseProgram(0);
 }
 
