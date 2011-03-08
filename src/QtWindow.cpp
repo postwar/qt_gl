@@ -4,7 +4,7 @@
 
 QtWindow::QtWindow() {
 	connect(&m_Timer, SIGNAL(timeout()), this, SLOT(Update()));
-	m_Timer.start(20);
+	m_Timer.start(16);
 	
 	// create widget with multisampling and alpha channel
 	QGLFormat format(QGL::SampleBuffers | QGL::AlphaChannel);
