@@ -11,6 +11,7 @@ SET(HEADERS
 	RenderBackend.hpp
 	RenderData.hpp
 	Scene.hpp
+	WorldObject.hpp
 	)
 
 INSTALL(FILES

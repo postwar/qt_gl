@@ -12,6 +12,7 @@ ADD_EXECUTABLE(qt_gl
 	Shader.cpp
 	TextureLayer.cpp
 	VertexData.cpp
+	WorldObject.cpp
 	)
 
 # Link against the provided libraries
