@@ -70,7 +70,7 @@ void Mesh::Create(const VertexData &vertices) {
 }
 
 
-void Mesh::Bind() {
+void Mesh::Bind() const {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
@@ -91,11 +91,11 @@ void Mesh::Bind() {
 }
 
 
-void Mesh::UnBind() {
+void Mesh::UnBind() const {
 }
 
 
-void Mesh::Render() {
+void Mesh::Render() const {
 	GLuint count = m_IndexEnd - m_IndexStart;
 	
 	glDrawRangeElements(GL_TRIANGLES, m_IndexStart, m_IndexEnd, count, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));

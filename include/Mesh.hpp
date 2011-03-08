@@ -18,9 +18,9 @@ class Mesh {
 		Mesh();
 		virtual ~Mesh();
 		void Create(const VertexData &vertices);
-		void Bind();
-		void UnBind();
-		void Render();
+		void Bind() const;
+		void UnBind() const;
+		void Render() const;
 	
 	private:
 		Mesh(const Mesh &mesh);
