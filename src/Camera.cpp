@@ -1,5 +1,5 @@
 #include "Camera.hpp"
-#include <GL/gl.h>
+#include <GL/glew.h>
 
 
 Camera::Camera() {
