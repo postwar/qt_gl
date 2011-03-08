@@ -10,12 +10,6 @@ WorldObject::WorldObject() {
 
 
 WorldObject::~WorldObject() {
-	for (unsigned int i = 0; i < m_Textures.size(); i++) {
-		delete m_Textures[i];
-	}
-	
-	delete m_Mesh;
-	delete m_Shader;
 }
 
 
@@ -31,6 +25,21 @@ void WorldObject::SetMesh(Mesh *mesh) {
 
 void WorldObject::SetShader(Shader *shader) {
 	m_Shader = shader;
+}
+
+
+const std::vector<TextureLayer *> &WorldObject::GetTextures() const {
+	return m_Textures;
+}
+
+
+const Mesh *WorldObject::GetMesh() const {
+	return m_Mesh;
+}
+
+
+const Shader *WorldObject::GetShader() const {
+	return m_Shader;
 }
 
 
