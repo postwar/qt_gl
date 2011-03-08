@@ -40,14 +40,13 @@ void Scene::Initialize() {
 	m_Shader->Create("../data/shader/test.vs", "../data/shader/test.fs");
 	std::cout << m_Shader->DebugInfo() << std::endl;
 	
-	for (unsigned int i = 0; i < 10; i++) {
-		RenderData object;
-		object.ObjectId = i;
-		object.Texture = m_Textures;
-		object.MeshId = m_Mesh;
-		object.ShaderId = m_Shader;
+	for (int i = 0; i < 10; i++) {
+		WorldObject o;
+		o.SetMesh(m_Mesh);
+		o.SetTextures(m_Textures);
+		o.SetShader(m_Shader);
 		
-		m_Data.push_back(object);
+		m_Objects.push_back(o);
 	}
 }
 
@@ -69,11 +68,13 @@ void Scene::Update() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	m_Camera.Rotate(0.0, 0.0, 0.1);
+	
+	m_Objects[0].Translate(0.01, 0.0, 0.0);
 }
 
 
-const std::vector<RenderData> &Scene::GetRenderData() const {
-	return m_Data;
+const std::vector<WorldObject> &Scene::GetRenderData() const {
+	return m_Objects;
 }
 
 

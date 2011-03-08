@@ -25,7 +25,7 @@ void QtGlWidget::Update() {
 	
 	m_Scene.Update();
 	
-	const std::vector<RenderData> &data = m_Scene.GetRenderData();
+	const std::vector<WorldObject> &data = m_Scene.GetRenderData();
 	for (unsigned int i = 0; i < data.size(); i++) {
 		m_RenderBackend.PushRenderData(data[i]);
 	}

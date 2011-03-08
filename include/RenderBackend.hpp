@@ -7,7 +7,7 @@
 #include <GL/gl.h>
 #include <GL/glext.h>
 */
-#include "RenderData.hpp"
+#include "WorldObject.hpp"
 #include "Rect.hpp"
 #include "Shader.hpp"
 
@@ -17,7 +17,7 @@ class RenderBackend {
 		virtual ~RenderBackend();
 		void Initialize();
 		void StartFrame();
-		void PushRenderData(const RenderData &data);
+		void PushRenderData(const WorldObject &data);
 		void Render();
 		void RenderSelect();
 		const std::vector<unsigned int> &Select(const Rect &area);
@@ -27,7 +27,7 @@ class RenderBackend {
 		void ClearScreen();
 	
 	private:
-		std::vector<RenderData> m_RenderData;
+		std::vector<WorldObject> m_RenderData;
 		std::vector<unsigned int> m_Selection;
 		std::vector<GLuint> m_SelectionBuffer;
 		Shader m_Shader;

@@ -4,9 +4,9 @@
 #include <vector>
 #include "Camera.hpp"
 #include "Mesh.hpp"
-#include "RenderData.hpp"
 #include "Shader.hpp"
 #include "TextureLayer.hpp"
+#include "WorldObject.hpp"
 
 class Scene {
 	public:
@@ -14,15 +14,15 @@ class Scene {
 		virtual ~Scene();
 		void Initialize();
 		void Update();
-		const std::vector<RenderData> &GetRenderData() const;
+		const std::vector<WorldObject> &GetRenderData() const;
 		void Resize(int width, int height);
 	
 	private:
 		Camera m_Camera;
-		std::vector<RenderData> m_Data;
 		std::vector<TextureLayer *> m_Textures;
 		Mesh *m_Mesh;
 		Shader *m_Shader;
+		std::vector<WorldObject> m_Objects;
 };
 
 #endif

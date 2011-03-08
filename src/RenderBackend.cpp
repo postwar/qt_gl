@@ -45,20 +45,20 @@ void RenderBackend::StartFrame() {
 }
 
 
-void RenderBackend::PushRenderData(const RenderData &data) {
+void RenderBackend::PushRenderData(const WorldObject &data) {
 	m_RenderData.push_back(data);
 }
 
 
 void RenderBackend::Render() {
 	for (unsigned int i = 0; i < m_RenderData.size(); i++) {
-		for (unsigned int texture = 0; texture < m_RenderData[i].Texture.size(); texture++) {
+		for (unsigned int texture = 0; texture < m_RenderData[i].GetTextures().size(); texture++) {
 			glActiveTexture(GL_TEXTURE0 + texture);
-			m_RenderData[i].Texture[texture]->Bind();
+			m_RenderData[i].GetTextures()[texture]->Bind();
 		}
-		m_RenderData[i].ShaderId->Bind();
-		m_RenderData[i].MeshId->Bind();
-		m_RenderData[i].MeshId->Render();
+		m_RenderData[i].GetShader()->Bind();
+		m_RenderData[i].GetMesh()->Bind();
+		m_RenderData[i].GetMesh()->Render();
 	}
 }
 
@@ -67,9 +67,9 @@ void RenderBackend::RenderSelect() {
 	m_Shader.Bind();
 
 	for (unsigned int i = 0; i < m_RenderData.size(); i++) {
-		for (unsigned int texture = 0; texture < m_RenderData[i].Texture.size(); texture++) {
+		for (unsigned int texture = 0; texture < m_RenderData[i].GetTextures().size(); texture++) {
 			glActiveTexture(GL_TEXTURE0 + texture);
-			m_RenderData[i].Texture[texture]->Bind();
+			m_RenderData[i].GetTextures()[texture]->Bind();
 		}
 		
 		// The shader writes the color values in the framebuffer if the object
@@ -82,8 +82,8 @@ void RenderBackend::RenderSelect() {
 		
 		glColor3ub(r, g, b);
 		
-		m_RenderData[i].MeshId->Bind();
-		m_RenderData[i].MeshId->Render();
+		m_RenderData[i].GetMesh()->Bind();
+		m_RenderData[i].GetMesh()->Render();
 	}
 	glColor4ub(255, 255, 255, 255);
 	
@@ -171,7 +171,7 @@ const std::vector<unsigned int> &RenderBackend::Select(const Rect &area) {
 	
 	for (unsigned int i = 0; i < m_RenderData.size(); i++) {
 		if (buf[i]) {
-			m_Selection.push_back(m_RenderData[i].ObjectId);
+			m_Selection.push_back(m_RenderData[i].GetObjectId());
 		}
 	}
 	
