@@ -8,6 +8,7 @@ ADD_EXECUTABLE(qt_gl
 	QtWindow.cpp
 	QtGlWidget.cpp
 	RenderBackend.cpp
+	Scene.cpp
 	Shader.cpp
 	TextureLayer.cpp
 	VertexData.cpp

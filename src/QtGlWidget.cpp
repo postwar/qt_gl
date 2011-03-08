@@ -1,38 +1,40 @@
 #include "QtGlWidget.hpp"
 #include <iostream>
 #include <QtGui/QMouseEvent>
-#include <cstdlib>
-#include <cmath>
-#include <sys/time.h>
-#include "Objects.hpp"
 
 
 QtGlWidget::QtGlWidget(QGLFormat format, QWidget *parent)
 		// We need the alpha channel for the color picking
 		: QGLWidget(format, parent) {
 	// showFullScreen();
+	
+	// always emit mouse movement events
 	setMouseTracking(true);
+	
+	gettimeofday(&m_LastUpdate, NULL);
+	m_FrameRate = 0.0;
 }
 
 
 QtGlWidget::~QtGlWidget() {
-	for (unsigned int i = 0; i < m_Textures.size(); i++) {
-		delete m_Textures[i];
-	}
-	
-	delete m_Mesh;
-	delete m_Shader;
 }
 
 
 void QtGlWidget::Update() {
 	m_RenderBackend.StartFrame();
 	
-	for (unsigned int i = 0; i < m_Data.size(); i++) {
-		m_RenderBackend.PushRenderData(m_Data[i]);
+	m_Scene.Update();
+	
+	const std::vector<RenderData> &data = m_Scene.GetRenderData();
+	for (unsigned int i = 0; i < data.size(); i++) {
+		m_RenderBackend.PushRenderData(data[i]);
 	}
 	
 	updateGL();
+	
+	CalculateFrameRate();
+    std::cout << "FPS: " << m_FrameRate << std::endl;
+    
 	m_RenderBackend.EndFrame();
 }
 
@@ -55,82 +57,20 @@ void QtGlWidget::initializeGL() {
 	} else {
 		std::cout << "GLEW initialization successful" << std::endl;
 	}
-
-	TextureLayer *texture1 = new TextureLayer();
-	TextureLayer *texture2 = new TextureLayer();
-	TextureLayer *texture3 = new TextureLayer();
-	m_Mesh = new Mesh();
-	m_Mesh->Create(Objects::CreateSquare());
 	
-	// texture1->Create("../data/gfx/2008_BlastDoor_TextureDiff_large.jpg");
-	texture1->Create("../data/gfx/stone_wall.bmp");
-	m_Textures.push_back(texture1);
-	// texture2->Create("../data/gfx/2008_BlastDoor_TextureNormal_large.jpg");
-	texture2->Create("../data/gfx/stone_wall_normal_map.bmp");
-	m_Textures.push_back(texture2);
-	// texture3->Create("../data/gfx/2008_BlastDoor_TextureSpec_large.jpg");
-	texture3->Create("../data/gfx/specular_map.jpg");
-	m_Textures.push_back(texture3);
-
-
-	m_Shader = new Shader();
-	m_Shader->Create("../data/shader/test.vs", "../data/shader/test.fs");
-	std::cout << m_Shader->DebugInfo() << std::endl;
-	
-	for (unsigned int i = 0; i < 10; i++) {
-		RenderData object;
-		object.ObjectId = i;
-		object.Texture = m_Textures;
-		object.MeshId = m_Mesh;
-		object.ShaderId = m_Shader;
-		
-		m_Data.push_back(object);
-	}
-	
+	m_Scene.Initialize();
 	m_RenderBackend.Initialize();
 }
 
 
 void QtGlWidget::paintGL() {
-	struct timeval t1;
-	struct timeval t2;
-	double elapsedTime;
-	
-	
-	
-	
-	static float counter = 0.0;
-	counter += 0.01;
-		
-	float x = cos(counter) * 5;
-	float z = sin(counter) * 5;
-	
-	glEnable(GL_LIGHT0);
-	GLfloat position[] = { x, x, z, 1.0f };
-	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glMaterialf(GL_FRONT, GL_SHININESS, 0.0);
-	
-	glDisable(GL_COLOR_MATERIAL);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
-	
-	
-	
-	gettimeofday(&t1, NULL);
 	// m_RenderBackend.RenderSelect();
 	m_RenderBackend.Render();
-	gettimeofday(&t2, NULL);
-	
-	elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;
-    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
-	
-	// if (elapsedTime != 0) std::cout << 1.0 / elapsedTime << std::endl;
 }
 
 
 void QtGlWidget::resizeGL(int width, int height) {
-	m_Camera.Resize(width, height);
+	m_Scene.Resize(width, height);
 }
 
 
@@ -158,5 +98,20 @@ void QtGlWidget::mousePressEvent(QMouseEvent *event) {
 
 void QtGlWidget::mouseMoveEvent(QMouseEvent *event) {
 	std::cout << "Mouse position: (" << event->x() << ", " << event->y() << ")" << std::endl;
+}
+
+
+void QtGlWidget::CalculateFrameRate() {
+	struct timeval now;
+	double elapsedTime;
+	
+	gettimeofday(&now, NULL);
+	
+	elapsedTime = (now.tv_sec - m_LastUpdate.tv_sec) * 1000.0;
+    elapsedTime += (now.tv_usec - m_LastUpdate.tv_usec) / 1000.0;
+    
+    m_LastUpdate = now;
+    
+    if (elapsedTime != 0.0) m_FrameRate = 1000.0 / elapsedTime;
 }
 

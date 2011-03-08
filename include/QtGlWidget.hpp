@@ -3,11 +3,9 @@
 
 #include <vector>
 #include "RenderBackend.hpp"
-#include "Mesh.hpp"
-#include "TextureLayer.hpp"
-#include "Camera.hpp"
-#include "Shader.hpp"
+#include "Scene.hpp"
 #include <QtOpenGL/QGLWidget>
+#include <sys/time.h>
 
 class QtGlWidget : public QGLWidget {
 	Q_OBJECT
@@ -27,12 +25,13 @@ class QtGlWidget : public QGLWidget {
 		void mouseMoveEvent(QMouseEvent *event);
 	
 	private:
+		void CalculateFrameRate();
+	
+	private:
 		RenderBackend m_RenderBackend;
-		Camera m_Camera;
-		std::vector<RenderData> m_Data;
-		std::vector<TextureLayer *> m_Textures;
-		Mesh *m_Mesh;
-		Shader *m_Shader;
+		Scene m_Scene;
+		struct timeval m_LastUpdate;
+		double m_FrameRate;
 };
 
 #endif

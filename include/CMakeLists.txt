@@ -10,6 +10,7 @@ SET(HEADERS
 	Rectangle.hpp
 	RenderBackend.hpp
 	RenderData.hpp
+	Scene.hpp
 	)
 
 INSTALL(FILES
