@@ -1,10 +1,12 @@
 #ifndef WORLDOBJECT_HPP_
 #define WORLDOBJECT_HPP_
 
-#include "Mesh.hpp"
-#include "Shader.hpp"
-#include "TextureLayer.hpp"
 #include "Vector.hpp"
+#include <vector>
+
+class Mesh;
+class Shader;
+class TextureLayer;
 
 class WorldObject {
 	public:
@@ -16,8 +18,10 @@ class WorldObject {
 		const std::vector<TextureLayer *> &GetTextures() const;
 		const Mesh *GetMesh() const;
 		const Shader *GetShader() const;
-		void Translate(float x, float y, float z);
+		void Move(float x, float y, float z);
+		void Rotate(float x, float y, float z);
 		const Vector3 &GetPosition() const;
+		const Vector3 &GetRotation() const;
 		unsigned int GetObjectId() const;
 	
 	private:
@@ -27,6 +31,7 @@ class WorldObject {
 		Mesh *m_Mesh;
 		Shader *m_Shader;
 		Vector3 m_Position;
+		Vector3 m_Rotation;
 		unsigned int m_ObjectId;
 };
 

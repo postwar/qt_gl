@@ -6,6 +6,13 @@ unsigned int WorldObject::nextObjectId = 0;
 WorldObject::WorldObject() {
 	m_ObjectId = nextObjectId;
 	nextObjectId++;
+	
+	m_Position.X = 0.0;
+	m_Position.Y = 0.0;
+	m_Position.Z = 0.0;
+	m_Rotation.X = 0.0;
+	m_Rotation.Y = 0.0;
+	m_Rotation.Z = 0.0;
 }
 
 
@@ -43,15 +50,27 @@ const Shader *WorldObject::GetShader() const {
 }
 
 
-void WorldObject::Translate(float x, float y, float z) {
+void WorldObject::Move(float x, float y, float z) {
 	m_Position.X += x;
 	m_Position.Y += y;
 	m_Position.Z += z;
 }
 
 
+void WorldObject::Rotate(float x, float y, float z) {
+	m_Rotation.X += x;
+	m_Rotation.Y += y;
+	m_Rotation.Z += z;
+}
+
+
 const Vector3 &WorldObject::GetPosition() const {
 	return m_Position;
+}
+
+
+const Vector3 &WorldObject::GetRotation() const {
+	return m_Rotation;
 }
 
 

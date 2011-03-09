@@ -45,6 +45,7 @@ void Scene::Initialize() {
 		o.SetMesh(m_Mesh);
 		o.SetTextures(m_Textures);
 		o.SetShader(m_Shader);
+		o.Move(0.0, 0.0, 0.0);
 		
 		m_Objects.push_back(o);
 	}
@@ -67,9 +68,11 @@ void Scene::Update() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
-	m_Camera.Rotate(0.0, 0.0, 0.1);
+	// m_Camera.Rotate(0.0, 0.0, 0.1);
+	m_Camera.Apply();
 	
-	m_Objects[0].Translate(0.01, 0.0, 0.0);
+	m_Objects[0].Move(0.5, 0.0, 0.0);
+	m_Objects[0].Rotate(0.0, 0.0, 0.5);
 }
 
 
