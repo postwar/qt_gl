@@ -49,6 +49,9 @@ void Scene::Initialize() {
 		
 		m_Objects.push_back(o);
 	}
+	
+	m_Cameras.resize(1);
+	m_Cameras[0].Move(0.0, 0.0, 500.0);
 }
 
 
@@ -59,6 +62,9 @@ void Scene::Update() {
 	float x = cos(counter) * 5;
 	float z = sin(counter) * 5;
 	
+	x = 0.0;
+	z = 1.0;
+	
 	glEnable(GL_LIGHT0);
 	GLfloat position[] = { x, x, z, 1.0f };
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
@@ -68,8 +74,9 @@ void Scene::Update() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
-	// m_Camera.Rotate(0.0, 0.0, 0.1);
-	m_Camera.Apply();
+	// m_Cameras[0].Rotate(0.0, 0.0, 0.1);
+	// m_Cameras[0].Move(0.0, 0.0, 1.0);
+	m_Cameras[0].Apply();
 	
 	m_Objects[0].Move(0.5, 0.0, 0.0);
 	m_Objects[0].Rotate(0.0, 0.0, 0.5);
@@ -81,6 +88,14 @@ const std::vector<WorldObject> &Scene::GetRenderData() const {
 }
 
 
-void Scene::Resize(int width, int height) {
-	m_Camera.Resize(width, height);
+const std::vector<Camera> &Scene::GetCameras() const {
+	return m_Cameras;
 }
+
+
+void Scene::Resize(int width, int height) {
+	for (unsigned int i = 0; i < m_Cameras.size(); i++) {
+		m_Cameras[i].Resize(width, height);
+	}
+}
+

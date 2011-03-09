@@ -15,10 +15,11 @@ class Scene {
 		void Initialize();
 		void Update();
 		const std::vector<WorldObject> &GetRenderData() const;
+		const std::vector<Camera> &GetCameras() const;
 		void Resize(int width, int height);
 	
 	private:
-		Camera m_Camera;
+		std::vector<Camera> m_Cameras;
 		std::vector<TextureLayer *> m_Textures;
 		Mesh *m_Mesh;
 		Shader *m_Shader;
