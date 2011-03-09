@@ -76,7 +76,6 @@ void Scene::Update() {
 	
 	// m_Cameras[0].Rotate(0.0, 0.0, 0.1);
 	// m_Cameras[0].Move(0.0, 0.0, 1.0);
-	m_Cameras[0].Apply();
 	
 	m_Objects[0].Move(0.5, 0.0, 0.0);
 	m_Objects[0].Rotate(0.0, 0.0, 0.5);

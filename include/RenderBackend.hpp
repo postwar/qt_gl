@@ -3,10 +3,7 @@
 
 #include <GL/glew.h>
 #include <vector>
-/*
-#include <GL/gl.h>
-#include <GL/glext.h>
-*/
+#include "Camera.hpp"
 #include "WorldObject.hpp"
 #include "Rect.hpp"
 #include "Shader.hpp"
@@ -18,6 +15,7 @@ class RenderBackend {
 		void Initialize();
 		void StartFrame();
 		void PushRenderData(const WorldObject &data);
+		void PushCamera(const Camera &camera);
 		void Render();
 		void RenderSelect();
 		const std::vector<unsigned int> &Select(const Rect &area);
@@ -28,6 +26,7 @@ class RenderBackend {
 	
 	private:
 		std::vector<WorldObject> m_RenderData;
+		std::vector<Camera> m_Cameras;
 		std::vector<unsigned int> m_Selection;
 		std::vector<GLuint> m_SelectionBuffer;
 		Shader m_Shader;

@@ -43,6 +43,7 @@ void RenderBackend::Initialize() {
 
 void RenderBackend::StartFrame() {
 	m_RenderData.clear();
+	m_Cameras.clear();
 	ClearScreen();
 	
 	glMatrixMode(GL_MODELVIEW);
@@ -55,25 +56,35 @@ void RenderBackend::PushRenderData(const WorldObject &data) {
 }
 
 
+void RenderBackend::PushCamera(const Camera &camera) {
+	m_Cameras.push_back(camera);
+}
+
+
 void RenderBackend::Render() {
-	for (unsigned int i = 0; i < m_RenderData.size(); i++) {
-		const Vector3 pos = m_RenderData[i].GetPosition();
-		const Vector3 rot = m_RenderData[i].GetRotation();
-		glPushMatrix();
-		glTranslatef(pos.X, pos.Y, pos.Z);
-		glRotatef(rot.X, 1.0, 0.0, 0.0);
-		glRotatef(rot.Y, 0.0, 1.0, 0.0);
-		glRotatef(rot.Z, 0.0, 0.0, 1.0);
+	for (unsigned int i = 0; i < m_Cameras.size(); i++) {
+		glLoadIdentity();
+		m_Cameras[i].Apply();
+	
+		for (unsigned int i = 0; i < m_RenderData.size(); i++) {
+			const Vector3 pos = m_RenderData[i].GetPosition();
+			const Vector3 rot = m_RenderData[i].GetRotation();
+			glPushMatrix();
+			glTranslatef(pos.X, pos.Y, pos.Z);
+			glRotatef(-rot.X, 1.0, 0.0, 0.0);
+			glRotatef(-rot.Y, 0.0, 1.0, 0.0);
+			glRotatef(-rot.Z, 0.0, 0.0, 1.0);
 		
-		for (unsigned int texture = 0; texture < m_RenderData[i].GetTextures().size(); texture++) {
-			glActiveTexture(GL_TEXTURE0 + texture);
-			m_RenderData[i].GetTextures()[texture]->Bind();
+			for (unsigned int texture = 0; texture < m_RenderData[i].GetTextures().size(); texture++) {
+				glActiveTexture(GL_TEXTURE0 + texture);
+				m_RenderData[i].GetTextures()[texture]->Bind();
+			}
+			m_RenderData[i].GetShader()->Bind();
+			m_RenderData[i].GetMesh()->Bind();
+			m_RenderData[i].GetMesh()->Render();
+		
+			glPopMatrix();
 		}
-		m_RenderData[i].GetShader()->Bind();
-		m_RenderData[i].GetMesh()->Bind();
-		m_RenderData[i].GetMesh()->Render();
-		
-		glPopMatrix();
 	}
 }
 

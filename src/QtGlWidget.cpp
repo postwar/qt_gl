@@ -30,6 +30,11 @@ void QtGlWidget::Update() {
 		m_RenderBackend.PushRenderData(data[i]);
 	}
 	
+	const std::vector<Camera> &cameras = m_Scene.GetCameras();
+	for (unsigned int i = 0; i < cameras.size(); i++) {
+		m_RenderBackend.PushCamera(cameras[i]);
+	}
+	
 	updateGL();
 	
 	CalculateFrameRate();
