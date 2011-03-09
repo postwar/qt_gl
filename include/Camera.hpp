@@ -6,17 +6,15 @@
 class Camera {
 	public:
 		Camera();
+		Camera(const Camera &camera);
 		virtual ~Camera();
+		Camera &operator =(const Camera &camera);
 		void Resize(int width, int height);
 		void Move(float x, float y, float z);
 		void Rotate(float x, float y, float z);
 		const Vector3 &GetPosition() const;
 		const Vector3 &GetRotation() const;
 		void Apply() const;
-	
-	private:
-		Camera(const Camera &camera);
-		Camera &operator =(const Camera &camera);
 	
 	private:
 		Vector3 m_Position;

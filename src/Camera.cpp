@@ -12,7 +12,31 @@ Camera::Camera() {
 }
 
 
+Camera::Camera(const Camera &camera) {
+	m_Position.X = camera.m_Position.X;
+	m_Position.Y = camera.m_Position.Y;
+	m_Position.Z = camera.m_Position.Z;
+	m_Rotation.X = camera.m_Rotation.X;
+	m_Rotation.Y = camera.m_Rotation.Y;
+	m_Rotation.Z = camera.m_Rotation.Z;
+}
+
+
 Camera::~Camera() {
+}
+
+
+Camera &Camera::operator =(const Camera &camera) {
+	if (&camera != this) {
+		m_Position.X = camera.m_Position.X;
+		m_Position.Y = camera.m_Position.Y;
+		m_Position.Z = camera.m_Position.Z;
+		m_Rotation.X = camera.m_Rotation.X;
+		m_Rotation.Y = camera.m_Rotation.Y;
+		m_Rotation.Z = camera.m_Rotation.Z;
+	}
+	
+	return *this;
 }
 
 
