@@ -1,5 +1,7 @@
 #include "RenderBackend.hpp"
 #include <iostream>
+#include "Mesh.hpp"
+#include "TextureLayer.hpp"
 
 
 const int RenderBackend::BUFFER_SIZE = 16;
@@ -42,6 +44,9 @@ void RenderBackend::Initialize() {
 void RenderBackend::StartFrame() {
 	m_RenderData.clear();
 	ClearScreen();
+	
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 
@@ -52,6 +57,14 @@ void RenderBackend::PushRenderData(const WorldObject &data) {
 
 void RenderBackend::Render() {
 	for (unsigned int i = 0; i < m_RenderData.size(); i++) {
+		const Vector3 pos = m_RenderData[i].GetPosition();
+		const Vector3 rot = m_RenderData[i].GetRotation();
+		glPushMatrix();
+		glTranslatef(pos.X, pos.Y, pos.Z);
+		glRotatef(rot.X, 1.0, 0.0, 0.0);
+		glRotatef(rot.Y, 0.0, 1.0, 0.0);
+		glRotatef(rot.Z, 0.0, 0.0, 1.0);
+		
 		for (unsigned int texture = 0; texture < m_RenderData[i].GetTextures().size(); texture++) {
 			glActiveTexture(GL_TEXTURE0 + texture);
 			m_RenderData[i].GetTextures()[texture]->Bind();
@@ -59,6 +72,8 @@ void RenderBackend::Render() {
 		m_RenderData[i].GetShader()->Bind();
 		m_RenderData[i].GetMesh()->Bind();
 		m_RenderData[i].GetMesh()->Render();
+		
+		glPopMatrix();
 	}
 }
 
