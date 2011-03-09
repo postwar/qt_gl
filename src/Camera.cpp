@@ -19,6 +19,8 @@ Camera::Camera(const Camera &camera) {
 	m_Rotation.X = camera.m_Rotation.X;
 	m_Rotation.Y = camera.m_Rotation.Y;
 	m_Rotation.Z = camera.m_Rotation.Z;
+	m_ViewportWidth = camera.m_ViewportWidth;
+	m_ViewportHeight = camera.m_ViewportHeight;
 }
 
 
@@ -34,6 +36,8 @@ Camera &Camera::operator =(const Camera &camera) {
 		m_Rotation.X = camera.m_Rotation.X;
 		m_Rotation.Y = camera.m_Rotation.Y;
 		m_Rotation.Z = camera.m_Rotation.Z;
+		m_ViewportWidth = camera.m_ViewportWidth;
+		m_ViewportHeight = camera.m_ViewportHeight;
 	}
 	
 	return *this;
