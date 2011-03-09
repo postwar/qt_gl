@@ -51,14 +51,18 @@ void Camera::Apply() const {
 	
 	glLoadIdentity();
 	glViewport(0, 0, m_ViewportWidth, m_ViewportHeight);
-	glOrtho(-m_ViewportWidth / 2.0, m_ViewportWidth / 2.0, -m_ViewportHeight / 2.0, m_ViewportHeight / 2.0, 0.0, 512.0);
-	// glFrustum(-m_ViewportWidth / 2.0, m_ViewportWidth / 2.0, -m_ViewportHeight / 2.0, m_ViewportHeight / 2.0, 0, 128);
-	// glFrustum(-1.0, 1.0, -1.0, 1.0, 0, 128);
+	
+	// orthogonal projection
+	// glOrtho(-m_ViewportWidth / 2.0, m_ViewportWidth / 2.0, -m_ViewportHeight / 2.0, m_ViewportHeight / 2.0, 0.0, 512.0);
+	
+	// perspective projection
+	float aspect = (1.0 * m_ViewportWidth) / (1.0 * m_ViewportHeight);
+	gluPerspective(60.0, aspect, 1.0, 512.0);
 
 	
 	glMatrixMode(GL_MODELVIEW);
 
-	glTranslatef(m_Position.X, m_Position.Y, m_Position.Z);
+	glTranslatef(-m_Position.X, -m_Position.Y, -m_Position.Z);
 	
 	glRotatef(m_Rotation.X, 1.0, 0.0, 0.0);
 	glRotatef(m_Rotation.Y, 0.0, 1.0, 0.0);
