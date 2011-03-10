@@ -76,6 +76,17 @@ float Light::GetShininess() const {
 
 
 void Light::Apply() {
+	GLfloat position[4];
+	
+	position[0] = m_Position.X;
+	position[1] = m_Position.Y;
+	position[2] = m_Position.Z;
+	position[3] = 1.0;
+	
+	glEnable(GL_LIGHT0);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+	glMaterialf(GL_FRONT, GL_SHININESS, m_Shininess);
+
 	// see: http://wiki.delphigl.com/index.php/Materialsammlung
 	// blending for transparent materials
 	glDisable(GL_COLOR_MATERIAL);
