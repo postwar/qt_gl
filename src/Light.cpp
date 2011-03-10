@@ -9,7 +9,7 @@ Light::Light() {
 	m_Ambient.Red = 0.0;
 	m_Ambient.Green = 0.0;
 	m_Ambient.Blue = 0.0;
-	m_Ambient.Alpha = 0.0;
+	m_Ambient.Alpha = 1.0;
 	m_Diffuse.Red = 1.0;
 	m_Diffuse.Green = 1.0;
 	m_Diffuse.Blue = 1.0;
