@@ -1,5 +1,6 @@
 #include "RenderBackend.hpp"
 #include <iostream>
+#include "Material.hpp"
 #include "Mesh.hpp"
 #include "TextureLayer.hpp"
 
@@ -79,6 +80,7 @@ void RenderBackend::Render() {
 				glActiveTexture(GL_TEXTURE0 + texture);
 				m_RenderData[i].GetTextures()[texture]->Bind();
 			}
+			m_RenderData[i].GetMaterial()->Bind();
 			m_RenderData[i].GetShader()->Bind();
 			m_RenderData[i].GetMesh()->Bind();
 			m_RenderData[i].GetMesh()->Render();
