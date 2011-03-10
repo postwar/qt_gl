@@ -35,6 +35,11 @@ void WorldObject::SetShader(Shader *shader) {
 }
 
 
+void WorldObject::SetMaterial(Material *material) {
+	m_Material = material;
+}
+
+
 const std::vector<TextureLayer *> &WorldObject::GetTextures() const {
 	return m_Textures;
 }
@@ -47,6 +52,11 @@ const Mesh *WorldObject::GetMesh() const {
 
 const Shader *WorldObject::GetShader() const {
 	return m_Shader;
+}
+
+
+const Material *WorldObject::GetMaterial() const {
+	return m_Material;
 }
 
 
