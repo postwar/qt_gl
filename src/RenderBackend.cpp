@@ -65,7 +65,7 @@ void RenderBackend::PushCamera(const Camera &camera) {
 void RenderBackend::Render() {
 	for (unsigned int i = 0; i < m_Cameras.size(); i++) {
 		glLoadIdentity();
-		m_Cameras[i].Apply();
+		m_Cameras[i].Bind();
 	
 		for (unsigned int i = 0; i < m_RenderData.size(); i++) {
 			const Vector3 pos = m_RenderData[i].GetPosition();

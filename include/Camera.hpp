@@ -14,7 +14,7 @@ class Camera {
 		void Rotate(float x, float y, float z);
 		const Vector3 &GetPosition() const;
 		const Vector3 &GetRotation() const;
-		void Apply() const;
+		void Bind() const;
 	
 	private:
 		Vector3 m_Position;

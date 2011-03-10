@@ -74,7 +74,7 @@ const Vector3 &Camera::GetRotation() const {
 }
 
 
-void Camera::Apply() const {
+void Camera::Bind() const {
 	glMatrixMode(GL_PROJECTION);
 	
 	glLoadIdentity();
