@@ -40,11 +40,14 @@ void Scene::Initialize() {
 	m_Shader->Create("../data/shader/test.vs", "../data/shader/test.fs");
 	std::cout << m_Shader->DebugInfo() << std::endl;
 	
+	m_Material = new Material();
+	
 	for (int i = 0; i < 10; i++) {
 		WorldObject o;
 		o.SetMesh(m_Mesh);
 		o.SetTextures(m_Textures);
 		o.SetShader(m_Shader);
+		o.SetMaterial(m_Material);
 		o.Move(0.0, 0.0, 0.0);
 		
 		m_Objects.push_back(o);
