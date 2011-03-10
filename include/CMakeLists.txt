@@ -9,6 +9,7 @@ SET(HEADERS
 	Camera.hpp
 	Color.hpp
 	Light.hpp
+	Material.hpp
 	Rectangle.hpp
 	RenderBackend.hpp
 	RenderData.hpp

@@ -3,6 +3,7 @@ ADD_EXECUTABLE(qt_gl
 	Camera.cpp
 	Light.cpp
 	Main.cpp
+	Material.cpp
 	Mesh.cpp
 	Objects.cpp
 	QtCore.cpp
