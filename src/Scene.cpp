@@ -15,6 +15,7 @@ Scene::~Scene() {
 	
 	delete m_Mesh;
 	delete m_Shader;
+	delete m_Material;
 }
 
 
@@ -69,7 +70,7 @@ void Scene::Update() {
 	position.Y = 0.0;	// cos(counter) * 5;
 	position.Z = 1.0;	// sin(counter) * 5;
 	m_Lights[0].SetPosition(position);
-	m_Lights[0].Apply();
+	m_Lights[0].Bind();
 	
 	// m_Cameras[0].Rotate(0.0, 0.0, 0.1);
 	// m_Cameras[0].Move(0.0, 0.0, 1.0);

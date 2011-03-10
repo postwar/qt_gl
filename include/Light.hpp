@@ -16,7 +16,7 @@ class Light {
 		const Color &GetDiffuseColor() const;
 		void SetSpecularColor(const Color &specular);
 		const Color &GetSpecularColor() const;
-		void Apply();
+		void Bind() const;
 	
 	private:
 		Vector3 m_Position;

@@ -64,7 +64,7 @@ const Color &Light::GetSpecularColor() const {
 }
 
 
-void Light::Apply() {
+void Light::Bind() const {
 	GLfloat position[4];
 	
 	position[0] = m_Position.X;
