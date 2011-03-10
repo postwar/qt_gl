@@ -17,7 +17,7 @@ class Material {
 		const Color &GetEmissionColor() const;
 		void SetShininess(float shininess);
 		float GetShininess() const;
-		void Apply();
+		void Bind();
 	
 	private:
 		Color m_Ambient;
