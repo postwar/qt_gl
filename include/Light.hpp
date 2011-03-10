@@ -16,8 +16,6 @@ class Light {
 		const Color &GetDiffuseColor() const;
 		void SetSpecularColor(const Color &specular);
 		const Color &GetSpecularColor() const;
-		void SetShininess(float shininess);
-		float GetShininess() const;
 		void Apply();
 	
 	private:
@@ -25,7 +23,6 @@ class Light {
 		Color m_Ambient;
 		Color m_Diffuse;
 		Color m_Specular;
-		float m_Shininess;
 };
 
 #endif

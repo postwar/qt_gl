@@ -10,15 +10,14 @@ Light::Light() {
 	m_Ambient.Green = 0.0;
 	m_Ambient.Blue = 0.0;
 	m_Ambient.Alpha = 0.0;
-	m_Diffuse.Red = 0.0;
-	m_Diffuse.Green = 0.0;
-	m_Diffuse.Blue = 0.0;
-	m_Diffuse.Alpha = 0.0;
-	m_Specular.Red = 0.0;
-	m_Specular.Green = 0.0;
-	m_Specular.Blue = 0.0;
-	m_Specular.Alpha = 0.0;
-	m_Shininess = 0.0;
+	m_Diffuse.Red = 1.0;
+	m_Diffuse.Green = 1.0;
+	m_Diffuse.Blue = 1.0;
+	m_Diffuse.Alpha = 1.0;
+	m_Specular.Red = 1.0;
+	m_Specular.Green = 1.0;
+	m_Specular.Blue = 1.0;
+	m_Specular.Alpha = 1.0;
 }
 
 
@@ -65,16 +64,6 @@ const Color &Light::GetSpecularColor() const {
 }
 
 
-void Light::SetShininess(float shininess) {
-	m_Shininess = shininess;
-}
-
-
-float Light::GetShininess() const {
-	return m_Shininess;
-}
-
-
 void Light::Apply() {
 	GLfloat position[4];
 	
@@ -85,11 +74,8 @@ void Light::Apply() {
 	
 	glEnable(GL_LIGHT0);
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glMaterialf(GL_FRONT, GL_SHININESS, m_Shininess);
-
-	// see: http://wiki.delphigl.com/index.php/Materialsammlung
-	// blending for transparent materials
-	glDisable(GL_COLOR_MATERIAL);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, &m_Ambient.Red);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, &m_Diffuse.Red);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, &m_Specular.Red);
 }
+
