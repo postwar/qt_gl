@@ -20,7 +20,7 @@ WorldObject::~WorldObject() {
 }
 
 
-void WorldObject::SetTextures(const std::vector<TextureLayer *> &textures) {
+void WorldObject::SetTextures(const std::vector<Texture *> &textures) {
 	m_Textures = textures;
 }
 
@@ -40,7 +40,7 @@ void WorldObject::SetMaterial(Material *material) {
 }
 
 
-const std::vector<TextureLayer *> &WorldObject::GetTextures() const {
+const std::vector<Texture *> &WorldObject::GetTextures() const {
 	return m_Textures;
 }
 

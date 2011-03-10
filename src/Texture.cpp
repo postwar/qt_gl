@@ -1,19 +1,19 @@
-#include "TextureLayer.hpp"
+#include "Texture.hpp"
 #include <QtGui/QImage>
 #include <QtOpenGL/QGLWidget>
 #include <iostream>
 
 
-TextureLayer::TextureLayer() {
+Texture::Texture() {
 }
 
 
-TextureLayer::~TextureLayer() {
+Texture::~Texture() {
 	glDeleteTextures(1, &m_TextureId);
 }
 
 
-void TextureLayer::Create(const std::string &file) {
+void Texture::Create(const std::string &file) {
 	QImage image;
 	
 	if (!image.load(file.c_str())) {
@@ -40,12 +40,12 @@ void TextureLayer::Create(const std::string &file) {
 }
 
 
-void TextureLayer::Bind() {
+void Texture::Bind() {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_TextureId);
 }
 
 
-void TextureLayer::UnBind() {
+void Texture::UnBind() {
 	glDisable(GL_TEXTURE_2D);
 }

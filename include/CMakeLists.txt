@@ -14,6 +14,7 @@ SET(HEADERS
 	RenderBackend.hpp
 	RenderData.hpp
 	Scene.hpp
+	Texture.hpp
 	WorldObject.hpp
 	)
 

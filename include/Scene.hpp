@@ -7,7 +7,7 @@
 #include "Material.hpp"
 #include "Mesh.hpp"
 #include "Shader.hpp"
-#include "TextureLayer.hpp"
+#include "Texture.hpp"
 #include "WorldObject.hpp"
 
 class Scene {
@@ -22,7 +22,7 @@ class Scene {
 	
 	private:
 		std::vector<Camera> m_Cameras;
-		std::vector<TextureLayer *> m_Textures;
+		std::vector<Texture *> m_Textures;
 		Mesh *m_Mesh;
 		Shader *m_Shader;
 		Material *m_Material;

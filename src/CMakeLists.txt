@@ -12,7 +12,7 @@ ADD_EXECUTABLE(qt_gl
 	RenderBackend.cpp
 	Scene.cpp
 	Shader.cpp
-	TextureLayer.cpp
+	Texture.cpp
 	VertexData.cpp
 	WorldObject.cpp
 	)

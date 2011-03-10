@@ -7,17 +7,17 @@
 class Material;
 class Mesh;
 class Shader;
-class TextureLayer;
+class Texture;
 
 class WorldObject {
 	public:
 		WorldObject();
 		virtual ~WorldObject();
-		void SetTextures(const std::vector<TextureLayer *> &textures);
+		void SetTextures(const std::vector<Texture *> &textures);
 		void SetMesh(Mesh *mesh);
 		void SetShader(Shader *shader);
 		void SetMaterial(Material *material);
-		const std::vector<TextureLayer *> &GetTextures() const;
+		const std::vector<Texture *> &GetTextures() const;
 		const Mesh *GetMesh() const;
 		const Shader *GetShader() const;
 		const Material *GetMaterial() const;
@@ -30,7 +30,7 @@ class WorldObject {
 	private:
 		static unsigned int nextObjectId;
 		
-		std::vector<TextureLayer *> m_Textures;
+		std::vector<Texture *> m_Textures;
 		Mesh *m_Mesh;
 		Shader *m_Shader;
 		Material *m_Material;

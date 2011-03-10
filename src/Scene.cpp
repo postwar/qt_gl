@@ -20,9 +20,9 @@ Scene::~Scene() {
 
 
 void Scene::Initialize() {
-	TextureLayer *texture1 = new TextureLayer();
-	TextureLayer *texture2 = new TextureLayer();
-	TextureLayer *texture3 = new TextureLayer();
+	Texture *texture1 = new Texture();
+	Texture *texture2 = new Texture();
+	Texture *texture3 = new Texture();
 	m_Mesh = new Mesh();
 	m_Mesh->Create(Objects::CreateSquare());
 	
@@ -39,6 +39,7 @@ void Scene::Initialize() {
 
 	m_Shader = new Shader();
 	m_Shader->Create("../data/shader/test.vs", "../data/shader/test.fs");
+	// m_Shader->Create("../data/shader/position.vs", "../data/shader/position.fs");
 	std::cout << m_Shader->DebugInfo() << std::endl;
 	
 	m_Material = new Material();

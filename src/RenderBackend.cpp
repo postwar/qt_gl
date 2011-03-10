@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Material.hpp"
 #include "Mesh.hpp"
-#include "TextureLayer.hpp"
+#include "Texture.hpp"
 
 
 const int RenderBackend::BUFFER_SIZE = 16;
