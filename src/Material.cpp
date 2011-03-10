@@ -77,7 +77,7 @@ float Material::GetShininess() const {
 }
 
 
-void Material::Bind() {
+void Material::Bind() const {
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, &m_Ambient.Red);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, &m_Diffuse.Red);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, &m_Specular.Red);
