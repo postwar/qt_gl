@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Camera.hpp"
+#include "Light.hpp"
 #include "Mesh.hpp"
 #include "Shader.hpp"
 #include "TextureLayer.hpp"
@@ -24,6 +25,7 @@ class Scene {
 		Mesh *m_Mesh;
 		Shader *m_Shader;
 		std::vector<WorldObject> m_Objects;
+		std::vector<Light> m_Lights;
 };
 
 #endif

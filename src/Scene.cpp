@@ -52,6 +52,8 @@ void Scene::Initialize() {
 	
 	m_Cameras.resize(1);
 	m_Cameras[0].Move(0.0, 0.0, 500.0);
+	
+	m_Lights.resize(1);
 }
 
 
@@ -59,20 +61,12 @@ void Scene::Update() {
 	static float counter = 0.0;
 	counter += 0.01;
 		
-	float x = cos(counter) * 5;
-	float z = sin(counter) * 5;
-	
-	x = 0.0;
-	z = 1.0;
-	
-	glEnable(GL_LIGHT0);
-	GLfloat position[] = { x, x, z, 1.0f };
-	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glMaterialf(GL_FRONT, GL_SHININESS, 0.0);
-	
-	glDisable(GL_COLOR_MATERIAL);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	Vector3 position;
+	position.X = 0.0;	// cos(counter) * 5;
+	position.Y = 0.0;	// cos(counter) * 5;
+	position.Z = 1.0;	// sin(counter) * 5;
+	m_Lights[0].SetPosition(position);
+	m_Lights[0].Apply();
 	
 	// m_Cameras[0].Rotate(0.0, 0.0, 0.1);
 	// m_Cameras[0].Move(0.0, 0.0, 1.0);
