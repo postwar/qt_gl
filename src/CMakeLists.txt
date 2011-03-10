@@ -1,6 +1,7 @@
 # Add the executable
 ADD_EXECUTABLE(qt_gl
 	Camera.cpp
+	Light.cpp
 	Main.cpp
 	Mesh.cpp
 	Objects.cpp

@@ -7,6 +7,8 @@ SET(MOC_HEADER_FILES
 SET(HEADERS
 	${MOC_HEADERS}
 	Camera.hpp
+	Color.hpp
+	Light.hpp
 	Rectangle.hpp
 	RenderBackend.hpp
 	RenderData.hpp
