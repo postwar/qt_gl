@@ -43,7 +43,7 @@ void RenderBackend::Initialize() {
 	
 	m_SelectionShader.Create("../data/shader/selection.vert", "../data/shader/selection.frag");
 	std::cout << m_SelectionShader.DebugInfo() << std::endl;
-	m_DeferredShader.Create("../data/shader/deferred_shading.vert", "../data/shader/deferred_shading.frag");
+	m_DeferredShader.Create("../data/shader/deferred_lighting.vert", "../data/shader/deferred_lighting.frag");
 	std::cout << m_DeferredShader.DebugInfo() << std::endl;
 	
 	m_SystemTextures.resize(1);

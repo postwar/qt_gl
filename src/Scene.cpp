@@ -38,13 +38,13 @@ void Scene::Initialize() {
 
 
 	m_Shader = new Shader();
-	m_Shader->Create("../data/shader/normal_mapping.vert", "../data/shader/normal_mapping.frag");
-	// m_Shader->Create("../data/shader/position.vert", "../data/shader/position.frag");
+	// m_Shader->Create("../data/shader/normal_mapping.vert", "../data/shader/normal_mapping.frag");
+	m_Shader->Create("../data/shader/deferred_shading.vert", "../data/shader/deferred_shading.frag");
 	std::cout << m_Shader->DebugInfo() << std::endl;
 	
 	m_Material = new Material();
 	
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 1; i++) {
 		WorldObject o;
 		o.SetMesh(m_Mesh);
 		o.SetTextures(m_Textures);
@@ -76,8 +76,8 @@ void Scene::Update() {
 	// m_Cameras[0].Rotate(0.0, 0.0, 0.1);
 	// m_Cameras[0].Move(0.0, 0.0, 1.0);
 	
-	m_Objects[0].Move(0.5, 0.0, 0.0);
-	m_Objects[0].Rotate(0.0, 0.0, 0.5);
+	// m_Objects[0].Move(0.5, 0.0, 0.0);
+	m_Objects[0].Rotate(0.0, 0.5, 0.0);
 }
 
 
