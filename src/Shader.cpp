@@ -77,6 +77,13 @@ void Shader::Bind() const {
 	} else {
 		// std::cerr << "Error: Find location 'Tex2'" << std::endl;
 	}
+	
+	samplerLocation = glGetUniformLocation(m_ShaderProgram, "Tex3");
+	if (samplerLocation != -1) {
+		glUniform1i(samplerLocation, 3);
+	} else {
+		// std::cerr << "Error: Find location 'Tex3'" << std::endl;
+	}
 }
 
 
@@ -238,6 +245,20 @@ void Shader::Bind() {
 		m_ShaderProgram.setUniformValue(samplerLocation, 1);
 	} else {
 		// std::cerr << "Error: Find location 'Tex1'" << std::endl;
+	}
+	
+	samplerLocation = m_ShaderProgram.uniformLocation("Tex2");
+	if (samplerLocation != -1) {
+		m_ShaderProgram.setUniformValue(samplerLocation, 2);
+	} else {
+		// std::cerr << "Error: Find location 'Tex2'" << std::endl;
+	}
+	
+	samplerLocation = m_ShaderProgram.uniformLocation("Tex3");
+	if (samplerLocation != -1) {
+		m_ShaderProgram.setUniformValue(samplerLocation, 3);
+	} else {
+		// std::cerr << "Error: Find location 'Tex3'" << std::endl;
 	}
 }
 
