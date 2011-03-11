@@ -6,7 +6,10 @@
 #include "Camera.hpp"
 #include "WorldObject.hpp"
 #include "Rect.hpp"
+#include "RenderTarget.hpp"
 #include "Shader.hpp"
+
+class Texture;
 
 class RenderBackend {
 	public:
@@ -29,7 +32,10 @@ class RenderBackend {
 		std::vector<Camera> m_Cameras;
 		std::vector<unsigned int> m_Selection;
 		std::vector<GLuint> m_SelectionBuffer;
-		Shader m_Shader;
+		Shader m_SelectionShader;
+		std::vector<Texture *> m_SystemTextures;
+		RenderTarget m_RenderTarget;
+		Shader m_DeferredShader;
 		static const int BUFFER_SIZE;
 };
 

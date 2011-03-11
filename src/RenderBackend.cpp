@@ -14,6 +14,9 @@ RenderBackend::RenderBackend() {
 
 
 RenderBackend::~RenderBackend() {
+	for (unsigned int i = 0; i < m_SystemTextures.size(); i++) {
+		delete m_SystemTextures[i];
+	}
 }
 
 
@@ -38,7 +41,17 @@ void RenderBackend::Initialize() {
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.1);
 	
-	m_Shader.Create("../data/shader/selection.vs", "../data/shader/selection.fs");
+	m_SelectionShader.Create("../data/shader/selection.vs", "../data/shader/selection.fs");
+	std::cout << m_SelectionShader.DebugInfo() << std::endl;
+	m_DeferredShader.Create("../data/shader/deferred_shading.vert", "../data/shader/deferred_shading.frag");
+	std::cout << m_DeferredShader.DebugInfo() << std::endl;
+	
+	m_SystemTextures.resize(1);
+	m_SystemTextures[0] = new Texture();
+	m_SystemTextures[0]->CreateSystemTexture(800, 600);
+	
+	m_RenderTarget.Create(800, 600);
+	m_RenderTarget.AddTexture(m_SystemTextures[0]);
 }
 
 
@@ -63,6 +76,8 @@ void RenderBackend::PushCamera(const Camera &camera) {
 
 
 void RenderBackend::Render() {
+	m_RenderTarget.Bind();
+	
 	for (unsigned int i = 0; i < m_Cameras.size(); i++) {
 		glLoadIdentity();
 		m_Cameras[i].Bind();
@@ -88,11 +103,50 @@ void RenderBackend::Render() {
 			glPopMatrix();
 		}
 	}
+	
+	m_RenderTarget.UnBind();
+	
+
+
+	// render the system textures on quad
+	// use an ortho projection matrix so that the quad is screen-filling
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0, 1.0, 0.0, 1.0, 0.1, 2.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glTranslatef(0.0, 0.0, -1.0);
+
+	glDisable(GL_LIGHTING);
+
+	m_DeferredShader.Bind();
+	glActiveTexture(GL_TEXTURE0);
+	glEnable(GL_TEXTURE0);
+	m_SystemTextures[0]->Bind();
+	glBegin(GL_QUADS);
+		glMultiTexCoord2f(GL_TEXTURE0, 0.0, 0.0); glVertex3f(0.0, 0.0, 0.0);
+		glMultiTexCoord2f(GL_TEXTURE0, 1.0, 0.0); glVertex3f(1.0, 0.0, 0.0);
+		glMultiTexCoord2f(GL_TEXTURE0, 1.0, 1.0); glVertex3f(1.0, 1.0, 0.0);
+		glMultiTexCoord2f(GL_TEXTURE0, 0.0, 1.0); glVertex3f(0.0, 1.0, 0.0);
+	glEnd();
+	m_DeferredShader.UnBind();
+
+
+	glEnable(GL_LIGHTING);
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
 }
 
 
 void RenderBackend::RenderSelect() {
-	m_Shader.Bind();
+	m_SelectionShader.Bind();
 
 	for (unsigned int i = 0; i < m_RenderData.size(); i++) {
 		for (unsigned int texture = 0; texture < m_RenderData[i].GetTextures().size(); texture++) {
@@ -115,7 +169,7 @@ void RenderBackend::RenderSelect() {
 	}
 	glColor4ub(255, 255, 255, 255);
 	
-	m_Shader.UnBind();
+	m_SelectionShader.UnBind();
 }
 
 
