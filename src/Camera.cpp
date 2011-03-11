@@ -81,11 +81,11 @@ void Camera::Bind() const {
 	glViewport(0, 0, m_ViewportWidth, m_ViewportHeight);
 	
 	// orthogonal projection
-	// glOrtho(-m_ViewportWidth / 2.0, m_ViewportWidth / 2.0, -m_ViewportHeight / 2.0, m_ViewportHeight / 2.0, 0.0, 512.0);
+	// glOrtho(-m_ViewportWidth / 2.0, m_ViewportWidth / 2.0, -m_ViewportHeight / 2.0, m_ViewportHeight / 2.0, 0.0, 1024.0);
 	
 	// perspective projection
 	float aspect = (1.0 * m_ViewportWidth) / (1.0 * m_ViewportHeight);
-	gluPerspective(60.0, aspect, 1.0, 512.0);
+	gluPerspective(60.0, aspect, 1.0, 1024.0);
 
 	
 	glMatrixMode(GL_MODELVIEW);
