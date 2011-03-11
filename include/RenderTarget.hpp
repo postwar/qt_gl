@@ -22,6 +22,9 @@ class RenderTarget {
 		void UnBind() const;
 	
 	private:
+		void CheckErrors() const;
+	
+	private:
 		unsigned int m_Width;
 		unsigned int m_Height;
 		std::vector<Texture *> m_Textures;
