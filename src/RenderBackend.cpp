@@ -41,7 +41,7 @@ void RenderBackend::Initialize() {
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.1);
 	
-	m_SelectionShader.Create("../data/shader/selection.vs", "../data/shader/selection.fs");
+	m_SelectionShader.Create("../data/shader/selection.vert", "../data/shader/selection.frag");
 	std::cout << m_SelectionShader.DebugInfo() << std::endl;
 	m_DeferredShader.Create("../data/shader/deferred_shading.vert", "../data/shader/deferred_shading.frag");
 	std::cout << m_DeferredShader.DebugInfo() << std::endl;

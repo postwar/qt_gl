@@ -38,8 +38,8 @@ void Scene::Initialize() {
 
 
 	m_Shader = new Shader();
-	m_Shader->Create("../data/shader/test.vs", "../data/shader/test.fs");
-	// m_Shader->Create("../data/shader/position.vs", "../data/shader/position.fs");
+	m_Shader->Create("../data/shader/normal_mapping.vert", "../data/shader/normal_mapping.frag");
+	// m_Shader->Create("../data/shader/position.vert", "../data/shader/position.frag");
 	std::cout << m_Shader->DebugInfo() << std::endl;
 	
 	m_Material = new Material();
