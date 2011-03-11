@@ -5,10 +5,15 @@
 #include <string>
 
 class Texture {
+	// RenderTarget needs access to the OpenGL texture name to attach the
+	// texture to a frame buffer object
+	friend class RenderTarget;
+
 	public:
 		Texture();
 		virtual ~Texture();
 		void Create(const std::string &file);
+		void CreateSystemTexture(unsigned int width, unsigned int height);
 		void Bind();
 		void UnBind();
 	
