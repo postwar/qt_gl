@@ -5,6 +5,11 @@
 
 
 RenderTarget::RenderTarget() {
+	glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &m_MaximumAttachments);
+	std::cout << "Maximum attachments for render targets: " << m_MaximumAttachments << std::endl;
+	
+	glGetIntegerv(GL_MAX_DRAW_BUFFERS, &m_MaximumDrawBuffers);
+	std::cout << "Maximum draw buffers for render targets: " << m_MaximumDrawBuffers << std::endl;
 }
 
 
@@ -35,6 +40,8 @@ void RenderTarget::Create(unsigned int width, unsigned int height) {
 
 
 void RenderTarget::AddTexture(Texture *texture) {
+	// if (m_Textures.size() >= m_MaximumAttachments) return;
+
 	int nextTexture = m_Textures.size();
 	GLuint textureId = texture->m_TextureId;
 

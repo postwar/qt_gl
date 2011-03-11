@@ -31,6 +31,8 @@ class RenderTarget {
 		std::vector<GLenum> m_Buffer;
 		GLuint m_Fbo;
 		GLuint m_DepthBuffer;
+		GLint m_MaximumAttachments;
+		GLint m_MaximumDrawBuffers;
 };
 
 #endif
