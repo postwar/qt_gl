@@ -25,7 +25,8 @@ void main() {
 	vec4 light = vec4(ambient.rgb + diffuse.rgb + specular.rgb, gl_FrontMaterial.diffuse.a);
 	vec4 color = textureMap;
 	
-	gl_FragColor = light * color;
+	// gl_FragColor = light * color;
+	gl_FragData[0] = light * color;
 }
 
 /*
