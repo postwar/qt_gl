@@ -11,6 +11,11 @@ class Texture;
  * http://www.opengl.org/wiki/Framebuffer_Object
  * http://www.gamedev.net/page/resources/_//feature/fprogramming/opengl-frame-buffer-object-101-r2331
  * http://www.gamedev.net/page/resources/_/reference/programming/opengl/opengl-frame-buffer-object-201-r2333
+ * http://www.songho.ca/opengl/gl_fbo.html
+ *
+ * Depth texture:
+ * glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, texWidth, texHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+ * glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
  */
 class RenderTarget {
 	public:
