@@ -46,12 +46,13 @@ void RenderBackend::Initialize() {
 	m_DeferredShader.Create("../data/shader/deferred_lighting.vert", "../data/shader/deferred_lighting.frag");
 	std::cout << m_DeferredShader.DebugInfo() << std::endl;
 	
-	m_SystemTextures.resize(1);
-	m_SystemTextures[0] = new Texture();
-	m_SystemTextures[0]->CreateSystemTexture(800, 600);
-	
 	m_RenderTarget.Create(800, 600);
-	m_RenderTarget.AddTexture(m_SystemTextures[0]);
+	
+	for (int i = 0; i < 4; i++) {
+		m_SystemTextures.push_back(new Texture());
+		m_SystemTextures[i]->CreateSystemTexture(800, 600);
+		m_RenderTarget.AddTexture(m_SystemTextures[i]);
+	}
 }
 
 
@@ -106,7 +107,7 @@ void RenderBackend::Render() {
 	
 	m_RenderTarget.UnBind();
 	
-
+	
 
 	// render the system textures on quad
 	// use an ortho projection matrix so that the quad is screen-filling
@@ -122,10 +123,13 @@ void RenderBackend::Render() {
 
 	glDisable(GL_LIGHTING);
 
+	
+	for (unsigned int texture = 0; texture < m_SystemTextures.size(); texture++) {
+		glActiveTexture(GL_TEXTURE0 + texture);
+		m_SystemTextures[texture]->Bind();
+	}
+	
 	m_DeferredShader.Bind();
-	glActiveTexture(GL_TEXTURE0);
-	glEnable(GL_TEXTURE0);
-	m_SystemTextures[0]->Bind();
 	glBegin(GL_QUADS);
 		glMultiTexCoord2f(GL_TEXTURE0, 0.0, 0.0); glVertex3f(0.0, 0.0, 0.0);
 		glMultiTexCoord2f(GL_TEXTURE0, 1.0, 0.0); glVertex3f(1.0, 0.0, 0.0);
