@@ -39,7 +39,8 @@ void Scene::Initialize() {
 
 	m_Shader = new Shader();
 	// m_Shader->Create("../data/shader/normal_mapping.vert", "../data/shader/normal_mapping.frag");
-	m_Shader->Create("../data/shader/deferred_shading.vert", "../data/shader/deferred_shading.frag");
+	// m_Shader->Create("../data/shader/deferred_shading.vert", "../data/shader/deferred_shading.frag");
+	m_Shader->Create("../data/shader/simple_deferred_shading.vert", "../data/shader/simple_deferred_shading.frag");
 	std::cout << m_Shader->DebugInfo() << std::endl;
 	
 	m_Material = new Material();
