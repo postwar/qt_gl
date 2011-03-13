@@ -49,9 +49,10 @@ void RenderBackend::Initialize() {
 	
 	m_RenderTarget.Create(800, 600);
 	
-	for (int i = 0; i < 4; i++) {
+	RenderTexture::Format format = RenderTexture::R8G8B8A8;
+	for (int i = 0; i < 1; i++) {
 		m_RenderTextures.push_back(new RenderTexture());
-		m_RenderTextures[i]->Create(800, 600);
+		m_RenderTextures[i]->Create(format, 800, 600);
 		m_RenderTarget.AddTexture(m_RenderTextures[i]);
 	}
 }
