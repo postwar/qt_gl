@@ -14,7 +14,6 @@ RenderTarget::RenderTarget() {
 
 
 RenderTarget::~RenderTarget() {
-	glDeleteRenderbuffers(1, &m_DepthBuffer);
 	glDeleteFramebuffers(1, &m_Fbo);
 }
 
@@ -23,17 +22,22 @@ void RenderTarget::Create(unsigned int width, unsigned int height) {
 	m_Width = width;
 	m_Height = height;
 
-	// create FBP
 	glGenFramebuffers(1, &m_Fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_Fbo);
-
-	// create depth buffer
-	glGenRenderbuffers(1, &m_DepthBuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, m_DepthBuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
 	
-	// attach depth buffer to FBO
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_DepthBuffer);
+	CheckErrors();
+}
+
+
+void RenderTarget::SetDepthTexture(RenderTexture *texture) {
+	GLuint textureId = texture->m_TextureId;
+
+	glBindTexture(GL_TEXTURE_2D, textureId);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, textureId, 0);
+	
+	m_DepthTexture = texture;
+	
+	std::cout << "Depth texture added to RenderTarget" << std::endl;
 	
 	CheckErrors();
 }

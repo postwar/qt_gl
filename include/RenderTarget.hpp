@@ -12,16 +12,13 @@ class RenderTexture;
  * http://www.gamedev.net/page/resources/_//feature/fprogramming/opengl-frame-buffer-object-101-r2331
  * http://www.gamedev.net/page/resources/_/reference/programming/opengl/opengl-frame-buffer-object-201-r2333
  * http://www.songho.ca/opengl/gl_fbo.html
- *
- * Depth texture:
- * glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, texWidth, texHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
- * glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
  */
 class RenderTarget {
 	public:
 		RenderTarget();
 		virtual ~RenderTarget();
 		void Create(unsigned int width, unsigned int height);
+		void SetDepthTexture(RenderTexture *texture);
 		void AddTexture(RenderTexture *texture);
 		void Bind() const;
 		void UnBind() const;
@@ -33,6 +30,7 @@ class RenderTarget {
 		unsigned int m_Width;
 		unsigned int m_Height;
 		std::vector<RenderTexture *> m_Textures;
+		RenderTexture *m_DepthTexture;
 		std::vector<GLenum> m_Buffer;
 		GLuint m_Fbo;
 		GLuint m_DepthBuffer;
