@@ -11,6 +11,7 @@ ADD_EXECUTABLE(qt_gl
 	QtGlWidget.cpp
 	RenderBackend.cpp
 	RenderTarget.cpp
+	RenderTexture.cpp
 	Scene.cpp
 	Shader.cpp
 	Texture.cpp

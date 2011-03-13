@@ -13,6 +13,7 @@ SET(HEADERS
 	Rectangle.hpp
 	RenderBackend.hpp
 	RenderTarget.hpp
+	RenderTexture.hpp
 	Scene.hpp
 	Texture.hpp
 	WorldObject.hpp
