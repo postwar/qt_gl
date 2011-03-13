@@ -16,6 +16,9 @@ class Texture;
  * Depth texture:
  * glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, texWidth, texHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
  * glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
+ *
+ * Image formats:
+ * http://www.opengl.org/wiki/Image_Formats
  */
 class RenderTarget {
 	public:
