@@ -17,8 +17,8 @@ class RenderTexture {
 		 * http://www.opengl.org/wiki/Image_Formats
 		 */
 		enum Format {
-			R8G8B8A8,
-			R10G10B10A2,
+			R8_G8_B8_A8,
+			R10_G10_B10_A2,
 			R11F_G11F_B10F,
 			DEPTH_16,
 			DEPTH_24,
