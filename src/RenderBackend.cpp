@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Material.hpp"
 #include "Mesh.hpp"
+#include "RenderTexture.hpp"
 #include "Texture.hpp"
 
 
@@ -14,8 +15,8 @@ RenderBackend::RenderBackend() {
 
 
 RenderBackend::~RenderBackend() {
-	for (unsigned int i = 0; i < m_SystemTextures.size(); i++) {
-		delete m_SystemTextures[i];
+	for (unsigned int i = 0; i < m_RenderTextures.size(); i++) {
+		delete m_RenderTextures[i];
 	}
 }
 
@@ -49,9 +50,9 @@ void RenderBackend::Initialize() {
 	m_RenderTarget.Create(800, 600);
 	
 	for (int i = 0; i < 4; i++) {
-		m_SystemTextures.push_back(new Texture());
-		m_SystemTextures[i]->CreateSystemTexture(800, 600);
-		m_RenderTarget.AddTexture(m_SystemTextures[i]);
+		m_RenderTextures.push_back(new RenderTexture());
+		m_RenderTextures[i]->Create(800, 600);
+		m_RenderTarget.AddTexture(m_RenderTextures[i]);
 	}
 }
 
@@ -124,9 +125,9 @@ void RenderBackend::Render() {
 	glDisable(GL_LIGHTING);
 
 	
-	for (unsigned int texture = 0; texture < m_SystemTextures.size(); texture++) {
+	for (unsigned int texture = 0; texture < m_RenderTextures.size(); texture++) {
 		glActiveTexture(GL_TEXTURE0 + texture);
-		m_SystemTextures[texture]->Bind();
+		m_RenderTextures[texture]->Bind();
 	}
 	
 	m_DeferredShader.Bind();

@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <vector>
 
-class Texture;
+class RenderTexture;
 
 /*
  * http://wiki.delphigl.com/index.php/Tutorial_Framebufferobject
@@ -16,16 +16,13 @@ class Texture;
  * Depth texture:
  * glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, texWidth, texHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
  * glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
- *
- * Image formats:
- * http://www.opengl.org/wiki/Image_Formats
  */
 class RenderTarget {
 	public:
 		RenderTarget();
 		virtual ~RenderTarget();
 		void Create(unsigned int width, unsigned int height);
-		void AddTexture(Texture *texture);
+		void AddTexture(RenderTexture *texture);
 		void Bind() const;
 		void UnBind() const;
 	
@@ -35,7 +32,7 @@ class RenderTarget {
 	private:
 		unsigned int m_Width;
 		unsigned int m_Height;
-		std::vector<Texture *> m_Textures;
+		std::vector<RenderTexture *> m_Textures;
 		std::vector<GLenum> m_Buffer;
 		GLuint m_Fbo;
 		GLuint m_DepthBuffer;
