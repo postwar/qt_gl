@@ -4,6 +4,10 @@ uniform sampler2D Tex2;
 varying vec3 lightDir;
 varying vec3 halfVector;
 
+
+/**
+ * http://wiki.gamedev.net/index.php/OpenGL:Tutorials:GLSL_Bump_Mapping
+ */
 void main() {
 	vec4 ambient = (gl_LightSource[0].ambient + gl_LightModel.ambient) * gl_FrontMaterial.ambient;
 	vec4 diffuse = vec4(0.0, 0.0, 0.0, 0.0);
