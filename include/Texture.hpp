@@ -13,7 +13,6 @@ class Texture {
 		Texture();
 		virtual ~Texture();
 		void Create(const std::string &file);
-		void CreateSystemTexture(unsigned int width, unsigned int height);
 		void Bind();
 		void UnBind();
 	
