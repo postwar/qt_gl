@@ -34,6 +34,7 @@ class RenderBackend {
 		std::vector<GLuint> m_SelectionBuffer;
 		Shader m_SelectionShader;
 		std::vector<RenderTexture *> m_RenderTextures;
+		RenderTexture *m_DepthTexture;
 		RenderTarget m_RenderTarget;
 		Shader m_DeferredShader;
 		static const int BUFFER_SIZE;

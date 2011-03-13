@@ -15,6 +15,7 @@ RenderBackend::RenderBackend() {
 
 
 RenderBackend::~RenderBackend() {
+	delete m_DepthTexture;
 	for (unsigned int i = 0; i < m_RenderTextures.size(); i++) {
 		delete m_RenderTextures[i];
 	}
@@ -49,7 +50,11 @@ void RenderBackend::Initialize() {
 	
 	m_RenderTarget.Create(800, 600);
 	
-	RenderTexture::Format format = RenderTexture::R8G8B8A8;
+	m_DepthTexture = new RenderTexture();
+	m_DepthTexture->Create(RenderTexture::DEPTH_24, 800, 600);
+	m_RenderTarget.SetDepthTexture(m_DepthTexture);
+	
+	RenderTexture::Format format = RenderTexture::R8_G8_B8_A8;
 	for (int i = 0; i < 1; i++) {
 		m_RenderTextures.push_back(new RenderTexture());
 		m_RenderTextures[i]->Create(format, 800, 600);
