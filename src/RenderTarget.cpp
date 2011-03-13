@@ -1,7 +1,7 @@
 #include "RenderTarget.hpp"
 #include <iostream>
 #include <string>
-#include "Texture.hpp"
+#include "RenderTexture.hpp"
 
 
 RenderTarget::RenderTarget() {
@@ -39,7 +39,7 @@ void RenderTarget::Create(unsigned int width, unsigned int height) {
 }
 
 
-void RenderTarget::AddTexture(Texture *texture) {
+void RenderTarget::AddTexture(RenderTexture *texture) {
 	// if (m_Textures.size() >= m_MaximumAttachments) return;
 
 	int nextTexture = m_Textures.size();
