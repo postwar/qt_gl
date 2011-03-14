@@ -32,7 +32,6 @@ void RenderTarget::Create(unsigned int width, unsigned int height) {
 void RenderTarget::SetDepthTexture(RenderTexture *texture) {
 	GLuint textureId = texture->m_TextureId;
 
-	glBindTexture(GL_TEXTURE_2D, textureId);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, textureId, 0);
 	
 	m_DepthTexture = texture;
@@ -49,7 +48,6 @@ void RenderTarget::AddTexture(RenderTexture *texture) {
 	int nextTexture = m_Textures.size();
 	GLuint textureId = texture->m_TextureId;
 
-	glBindTexture(GL_TEXTURE_2D, textureId);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + nextTexture, GL_TEXTURE_2D, textureId, 0);
 	m_Buffer.push_back(GL_COLOR_ATTACHMENT0 + nextTexture);
 
