@@ -20,9 +20,9 @@ class RenderTexture {
 			R8_G8_B8_A8,
 			R10_G10_B10_A2,
 			R11F_G11F_B10F,
-			DEPTH_16,
-			DEPTH_24,
-			DEPTH_32F,
+			DEPTH16,
+			DEPTH24,
+			DEPTH32F,
 			DEPTH24_STENCIL8,
 			DEPTH32F_STENCIL8
 		};
@@ -39,6 +39,7 @@ class RenderTexture {
 		RenderTexture &operator =(const RenderTexture &texture);
 		GLint ConvertInternalFormat(Format format) const;
 		GLint ConvertExternalFormat(Format format) const;
+		GLint ConvertType(Format format) const;
 	
 	private:
 		GLuint m_TextureId;

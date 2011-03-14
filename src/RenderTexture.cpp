@@ -16,11 +16,14 @@ void RenderTexture::Create(Format format, unsigned int width, unsigned int heigh
 	
 	GLint internalFormat = ConvertInternalFormat(format);
 	GLint externalFormat = ConvertExternalFormat(format);
+	GLint type = ConvertType(format);
 	
 	glBindTexture(GL_TEXTURE_2D, m_TextureId);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, externalFormat, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, externalFormat, type, NULL);
 	// glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, externalFormat, GL_FLOAT, NULL);
 	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
 	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
@@ -43,9 +46,9 @@ GLint RenderTexture::ConvertInternalFormat(Format format) const {
 		case R8_G8_B8_A8: return GL_RGBA;
 		case R10_G10_B10_A2: return GL_RGB10_A2;
 		case R11F_G11F_B10F: return GL_R11F_G11F_B10F;
-		case DEPTH_16: return GL_DEPTH_COMPONENT16;
-		case DEPTH_24: return GL_DEPTH_COMPONENT24;
-		case DEPTH_32F: return GL_DEPTH_COMPONENT32F;
+		case DEPTH16: return GL_DEPTH_COMPONENT16;
+		case DEPTH24: return GL_DEPTH_COMPONENT24;
+		case DEPTH32F: return GL_DEPTH_COMPONENT32F;
 		case DEPTH24_STENCIL8: return GL_DEPTH24_STENCIL8;
 		case DEPTH32F_STENCIL8: return GL_DEPTH32F_STENCIL8;
 	};
@@ -59,12 +62,29 @@ GLint RenderTexture::ConvertExternalFormat(Format format) const {
 		case R11F_G11F_B10F:
 			return GL_RGBA;
 		
-		case DEPTH_16:
-		case DEPTH_24:
-		case DEPTH_32F:
+		case DEPTH16:
+		case DEPTH24:
+		case DEPTH32F:
 		case DEPTH24_STENCIL8:
 		case DEPTH32F_STENCIL8:
 			return GL_DEPTH_COMPONENT;
+	};
+}
+
+
+GLint RenderTexture::ConvertType(Format format) const {
+	switch (format) {
+		case R8_G8_B8_A8:
+		case R10_G10_B10_A2:
+		case DEPTH16:
+		case DEPTH24:
+		case DEPTH24_STENCIL8:
+			return GL_UNSIGNED_BYTE;
+		
+		case DEPTH32F:
+		case R11F_G11F_B10F:
+		case DEPTH32F_STENCIL8:
+			return GL_FLOAT;
 	};
 }
 

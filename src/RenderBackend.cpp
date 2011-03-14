@@ -51,7 +51,7 @@ void RenderBackend::Initialize() {
 	m_RenderTarget.Create(800, 600);
 	
 	m_DepthTexture = new RenderTexture();
-	m_DepthTexture->Create(RenderTexture::DEPTH_24, 800, 600);
+	m_DepthTexture->Create(RenderTexture::DEPTH24, 800, 600);
 	m_RenderTarget.SetDepthTexture(m_DepthTexture);
 	
 	RenderTexture::Format format = RenderTexture::R8_G8_B8_A8;
@@ -131,10 +131,16 @@ void RenderBackend::Render() {
 	glDisable(GL_LIGHTING);
 
 	
+	
 	for (unsigned int texture = 0; texture < m_RenderTextures.size(); texture++) {
 		glActiveTexture(GL_TEXTURE0 + texture);
 		m_RenderTextures[texture]->Bind();
 	}
+	
+	/*
+	glActiveTexture(GL_TEXTURE1);
+	m_DepthTexture->Bind();
+	*/
 	
 	m_DeferredShader.Bind();
 	glBegin(GL_QUADS);
